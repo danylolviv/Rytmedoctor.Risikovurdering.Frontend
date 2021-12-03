@@ -1,15 +1,20 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+
+
 import {FormEditorComponent} from "./form-editor/form-editor.component";
 
-const routes: Routes = [
+import { RouterModule } from '@angular/router';
+import {QuestionEditorComponent} from "./question-editor/question-editor.component";
+
+
+const routes = [
   {
-    path:'', component: FormEditorComponent
+    path: '',
+    component: FormEditorComponent
+  },
+  {
+    path: 'questionEditor/:id',
+    component: QuestionEditorComponent
   }
 ];
 
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class FormEditorRoutingModule { }
+export const FormRoutes = RouterModule.forChild(routes);

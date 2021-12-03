@@ -1,4 +1,4 @@
 export interface QuestionTypeDto {
-  Id: number;
-  TypeName: string;
+  id: number;
+  typeName: string;
 }
