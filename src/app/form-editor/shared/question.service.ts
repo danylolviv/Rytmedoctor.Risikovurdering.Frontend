@@ -20,7 +20,7 @@ export class QuestionService {
 
   constructor(private _http: HttpClient) {}
 
-  getProducts(): Observable<FormQuestionDto[]>{
+  getQuestions(): Observable<FormQuestionDto[]>{
     console.log("called backend")
     return this._http
       .get<FormQuestionDto[]>("https://localhost:5001/api/Question");
@@ -49,6 +49,11 @@ export class QuestionService {
 
     // todo data consitency
     // todo promisses instead of observable
+  }
+
+  getQuestionById(id: number): Observable<FormQuestionDto>{
+    return this._http
+      .get<FormQuestionDto>("https://localhost:5001/api/Question/"+id)
   }
 
 

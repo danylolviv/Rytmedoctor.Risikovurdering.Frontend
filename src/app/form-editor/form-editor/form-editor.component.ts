@@ -22,7 +22,7 @@ export class FormEditorComponent implements OnInit {
   constructor(private _qServ: QuestionService, private _qTServ: QuestionTypesService, private router: Router) { }
 
   ngOnInit(): void {
-    this.questions$ = this._qServ.getProducts();
+    this.questions$ = this._qServ.getQuestions();
     this.questionTypes = this._qTServ.getLitTypes();
     /*this._qServ.getProducts().subscribe( (questionList) => {
       this.questions$ = questionList;
