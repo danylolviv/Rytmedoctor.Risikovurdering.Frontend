@@ -23,10 +23,7 @@ export class QuestionService {
   getProducts(): Observable<FormQuestionDto[]>{
     console.log("called backend")
     return this._http
-      .get<FormQuestionDto[]>("https://localhost:5001/api/Question")
-      .pipe(
-        delay(5000)
-      );
+      .get<FormQuestionDto[]>("https://localhost:5001/api/Question");
       /*.pipe(
         map(formQuestions => {
           //Select List C#
