@@ -1,14 +1,15 @@
 .question-card{
-  width: 30%;
+  width: fit-content;
   height: fit-content;
   margin-top: 3%;
 }
 .container{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .contentHolder{
   display: flex;
   justify-content: center;
 }
+

@@ -57,4 +57,9 @@ export class QuestionService {
   }
 
 
+  saveQuestion(newQuestion: FormQuestionDto): Observable<FormQuestionDto> {
+    console.log(newQuestion.description)
+    return this._http
+      .put<FormQuestionDto>("https://localhost:5001/api/Question/" + newQuestion.id, newQuestion)
+  }
 }

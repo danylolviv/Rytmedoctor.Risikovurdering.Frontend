@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormRoutes } from './form-editor-routing.module';
 import {CommonModule} from "@angular/common";
 import {QuestionEditorComponent} from "./question-editor/question-editor.component";
+import {MatIconModule} from "@angular/material/icon";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -29,7 +31,9 @@ import {QuestionEditorComponent} from "./question-editor/question-editor.compone
     MatOptionModule,
     MatButtonModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatIconModule,
+    FormsModule
   ],
   providers: [],
   exports: [],
