@@ -39,11 +39,20 @@ export class FormEditorComponent implements OnInit {
     let blanck = {title: "New Question", description: "Description", answerOptions: blanckListOpt } as FormQuestionDto;
     list.push(blanck)
 
+    // todo complete the new fake question to avoid errors in the console
+
     console.table(list)
   }
 
   openQuestionEditor(question: FormQuestionDto): void{
-    this.router.navigate(['questionEditor/'+question.id])
+    if (question.id === undefined){
+      console.log("when id is undefined")
+      this.router.navigate(['questionEditor/'+999])
+    }else {
+      console.log("also called this")
+      this.router.navigate(['questionEditor/'+question.id])
+    }
+
   }
 
 }

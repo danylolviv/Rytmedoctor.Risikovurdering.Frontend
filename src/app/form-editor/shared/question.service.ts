@@ -6,6 +6,7 @@ import {ListFormQuestionDto} from "./list-form-question-dto";
 import {Title} from "@angular/platform-browser";
 import {delay, map} from "rxjs/operators";
 import {AnswerOptionDto} from "./answer-option-dto";
+import {QuestionTypeDto} from "./question-type-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +54,7 @@ export class QuestionService {
 
   getQuestionById(id: number): Observable<FormQuestionDto>{
     return this._http
-      .get<FormQuestionDto>("https://localhost:5001/api/Question/"+id)
+        .get<FormQuestionDto>("https://localhost:5001/api/Question/"+id)
   }
 
 
@@ -63,3 +64,10 @@ export class QuestionService {
       .put<FormQuestionDto>("https://localhost:5001/api/Question/" + newQuestion.id, newQuestion)
   }
 }
+
+// let blanckQuestion = {
+//   title: "Title",
+//   description: "description",
+//   type:  {id:1} as QuestionTypeDto,
+//   answerOptions: [{optionText: "example option", weight: 1}] as AnswerOptionDto[]
+// } as FormQuestionDto

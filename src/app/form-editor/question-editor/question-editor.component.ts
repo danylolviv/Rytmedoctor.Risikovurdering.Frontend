@@ -17,6 +17,7 @@ export class QuestionEditorComponent implements OnInit {
 
   private questionId: number = 0
   public question$: Observable<FormQuestionDto> | undefined
+  public updatedQuestion$: Observable<FormQuestionDto>| undefined
   questionTypes: QuestionTypeDto[] | undefined
 
   public id: number|undefined
@@ -58,7 +59,7 @@ export class QuestionEditorComponent implements OnInit {
         answerOptions: answerOptions,
         orderId: orderId
       } as FormQuestionDto;
-    let smth = this._qServ.saveQuestion(newQuestion)
-    console.log(smth)
+    this.updatedQuestion$ = this._qServ.saveQuestion(newQuestion)
+
   }
 }

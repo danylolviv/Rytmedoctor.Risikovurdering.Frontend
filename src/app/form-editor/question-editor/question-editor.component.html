@@ -34,4 +34,10 @@
   </mat-card>
 </div>
 
-<ng-template #loadingTemplate>....loading</ng-template>
+<div *ngIf="updatedQuestion$| async as upQuest else loadingTemplate">
+  <p>{{upQuest.title}}</p>
+</div>
+
+<ng-template #loadingTemplate>
+
+</ng-template>
