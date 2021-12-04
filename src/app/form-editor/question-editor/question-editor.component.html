@@ -1,0 +1,43 @@
+<div class="contentHolder" *ngIf="question$| async as q else loadingTemplate">
+  <mat-card class="question-card" >
+    <mat-card-title>Title</mat-card-title>
+    <input type="text" [(ngModel)]="title" value="{{q.title}}">
+    <mat-card-subtitle>Description</mat-card-subtitle>
+    <input type="text" [(ngModel)]="description" value="{{q.description}}">
+    <mat-divider></mat-divider>
+    <mat-card-subtitle>Question type currently selected: {{q.type.typeName}}</mat-card-subtitle>
+    <mat-form-field appearance="fill">
+      <mat-label>Question Type</mat-label>
+      <mat-select [(ngModel)]="typeOfTheQuestion.id">
+        <mat-option *ngFor="let type of questionTypes" [value]="type.id">
+          {{type.typeName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <div class="container">
+      <h4 class="item">Answer option</h4>
+      <h4 class="item">Weight</h4>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="container" *ngFor="let qOption of q.answerOptions ">
+      <input class="item" [(ngModel)]="qOption.optionText" type="text" value="{{qOption.optionText}}">
+      <input class="item" [(ngModel)]="qOption.weight" type="number" value="{{qOption.weight}}">
+      <button mat-fab color="warn" aria-label="Example icon button with a delete icon" (click)="removeOption(qOption, q.answerOptions)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div class="container">
+      <button mat-raised-button color="primary" (click)="addBlanckOption(q.answerOptions)">add option</button>
+      <button mat-stroked-button color="accent" (click)="saveQuestion(q.answerOptions, q.id, q.orderId)">Save question</button>
+    </div>
+  </mat-card>
+</div>
+
+<div *ngIf="updatedQuestion$| async as upQuest else loadingTemplate">
+  <p>{{upQuest.title}}</p>
+</div>
+
+<ng-template #loadingTemplate>
+
+</ng-template>

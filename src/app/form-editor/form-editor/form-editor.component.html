@@ -1,0 +1,24 @@
+<p>form-editor works!</p>
+<ul class="formHolder" *ngIf="questions$ | async as questions else loadingTemplate">
+  <mat-card class="question-card" *ngFor="let q of questions" (click)="openQuestionEditor(q)">
+    <mat-card-title>{{q.title}}</mat-card-title>
+    <mat-card-subtitle>{{q.description}}</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-subtitle>Question type:</mat-card-subtitle>
+    <h5>{{q.type.typeName}}</h5>
+    <mat-divider></mat-divider>
+    <div class="container">
+      <h4 class="item">Answer option</h4>
+      <h4 class="item">Weight</h4>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="container" *ngFor="let qOption of q.answerOptions ">
+      <h4 class="item">{{qOption.optionText}}</h4>
+      <h4 class="item">{{qOption.weight}}</h4>
+    </div>
+  </mat-card>
+
+  <button mat-raised-button color="primary" (click)="addBlanckQuestion(questions)">+ tilføj spørgsmål</button>
+</ul>
+<ng-template #loadingTemplate>....loading</ng-template>
+
