@@ -60,7 +60,7 @@ export class QuestionEditorComponent implements OnInit {
         orderId: orderId
       } as FormQuestionDto;
     this.updatedQuestion$ = this._qServ.saveQuestion(newQuestion)
-   // this.router.navigate(['formEditor'])
-
+    // this.router.navigate(['formEditor'])
+    // starting on update functionality
   }
 }
