@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormQuestionDto} from "../shared/form-question-dto";
 import {QuestionService} from "../shared/question.service";
-import {Observable} from "rxjs";
+import {Observable, pipe} from "rxjs";
 import {QuestionTypeDto} from "../shared/question-type-dto";
 import {QuestionTypesService} from "../shared/question-types.service";
 import {AnswerOptionDto} from "../shared/answer-option-dto";
 import {FormQuestion} from "../shared/form-question";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-question-editor',
@@ -25,9 +26,8 @@ export class QuestionEditorComponent implements OnInit {
   public title: string| undefined
   public description: string| undefined
   public typeOfTheQuestion = {id:2} as QuestionTypeDto
-  public answerOptions: AnswerOptionDto[]|undefined
 
-  constructor(private route: ActivatedRoute, private _qServ: QuestionService, private _qTServ: QuestionTypesService) {
+  constructor(private route: ActivatedRoute, private _qServ: QuestionService, private _qTServ: QuestionTypesService, private router: Router) {
     this.route.params.subscribe(data => {
       this.questionId = data['id']
     })
@@ -60,6 +60,7 @@ export class QuestionEditorComponent implements OnInit {
         orderId: orderId
       } as FormQuestionDto;
     this.updatedQuestion$ = this._qServ.saveQuestion(newQuestion)
+   // this.router.navigate(['formEditor'])
 
   }
 }

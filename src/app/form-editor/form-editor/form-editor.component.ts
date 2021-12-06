@@ -32,24 +32,30 @@ export class FormEditorComponent implements OnInit {
   }
 
   addBlanckQuestion( list: FormQuestionDto[]): void{
-    let blanckListOpt = [] as AnswerOptionDto[];
-    let blanckOption = {optionText: "Option", weight: 0} as AnswerOptionDto;
-    blanckListOpt.push(blanckOption)
-    blanckListOpt.push(blanckOption)
-    let blanck = {title: "New Question", description: "Description", answerOptions: blanckListOpt } as FormQuestionDto;
-    list.push(blanck)
+    // let blanckListOpt: AnswerOptionDto[] =  [];
+    //
+    // blanckListOpt.push({optionText: "Option", weight: 0})
+    // blanckListOpt.push({optionText: "Option", weight: 0})
+    // let blanck = {
+    //   title: "New Question",
+    //   description: "Description",
+    //   answerOptions: blanckListOpt,
+    //   type: {typeName: "BlanckType"}
+    // } as FormQuestionDto;
+    let blanckN = {
+       title: "New Question, Press to edit",
+    } as FormQuestionDto;
+
+
+    list.push(blanckN)
 
     // todo complete the new fake question to avoid errors in the console
-
-    console.table(list)
   }
 
   openQuestionEditor(question: FormQuestionDto): void{
     if (question.id === undefined){
-      console.log("when id is undefined")
-      this.router.navigate(['questionEditor/'+999])
+      this.router.navigate(['questionEditor/'+1])
     }else {
-      console.log("also called this")
       this.router.navigate(['questionEditor/'+question.id])
     }
 

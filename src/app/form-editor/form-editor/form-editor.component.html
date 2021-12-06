@@ -5,17 +5,20 @@
     <mat-card-subtitle>{{q.description}}</mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-subtitle>Question type:</mat-card-subtitle>
-    <h5>{{q.type.typeName}}</h5>
+    <h5 *ngIf="q.type">{{q.type.typeName}}</h5>
     <mat-divider></mat-divider>
     <div class="container">
       <h4 class="item">Answer option</h4>
       <h4 class="item">Weight</h4>
     </div>
     <mat-divider></mat-divider>
-    <div class="container" *ngFor="let qOption of q.answerOptions ">
-      <h4 class="item">{{qOption.optionText}}</h4>
-      <h4 class="item">{{qOption.weight}}</h4>
+    <div *ngIf="q.answerOptions">
+      <div class="container" *ngFor="let qOption of q.answerOptions ">
+        <h4 class="item">{{qOption.optionText}}</h4>
+        <h4 class="item">{{qOption.weight}}</h4>
+      </div>
     </div>
+
   </mat-card>
 
   <button mat-raised-button color="primary" (click)="addBlanckQuestion(questions)">+ tilføj spørgsmål</button>
