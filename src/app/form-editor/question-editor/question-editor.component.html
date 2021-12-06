@@ -29,7 +29,9 @@
     </div>
     <div class="container">
       <button mat-raised-button color="primary" (click)="addBlanckOption(q.answerOptions)">add option</button>
-      <button mat-stroked-button color="accent" (click)="saveQuestion(q.answerOptions, q.id, q.orderId)">Save question</button>
+      <button mat-stroked-button color="accent" *ngIf="q.id == 1" (click)="saveQuestion(q.answerOptions, q.id, q.orderId)">Save question</button>
+      <button mat-stroked-button color="accent" *ngIf="q.id != 1" (click)="saveQuestion(q.answerOptions, q.id, q.orderId)">Update question</button>
+
     </div>
   </mat-card>
 </div>
