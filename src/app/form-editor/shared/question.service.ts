@@ -22,7 +22,6 @@ export class QuestionService {
   constructor(private _http: HttpClient) {}
 
   getQuestions(): Observable<FormQuestionDto[]>{
-    console.log("called backend")
     return this._http
       .get<FormQuestionDto[]>("https://localhost:5001/api/Question");
       /*.pipe(
