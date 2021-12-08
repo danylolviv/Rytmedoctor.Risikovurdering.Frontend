@@ -62,6 +62,11 @@ export class QuestionService {
     return this._http
       .put<FormQuestionDto>("https://localhost:5001/api/Question/" + newQuestion.id, newQuestion)
   }
+
+  deleteQuestion(id: number): Observable<FormQuestionDto> {
+    return this._http
+      .delete<FormQuestionDto>("https://localhost:5001/api/Question/"+id);
+  }
 }
 
 // let blanckQuestion = {
