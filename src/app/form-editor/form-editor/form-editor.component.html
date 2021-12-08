@@ -1,7 +1,10 @@
 <p>form-editor works!</p>
+<div *ngIf="deletedQuestion">
+  <p>Successfully deleted question with id: {{deletedQuestion.id}}</p>
+</div>
 <ul class="formHolder" *ngIf="questions$ | async as questions else loadingTemplate">
-  <mat-card class="question-card" *ngFor="let q of questions" (click)="openQuestionEditor(q)">
-    <mat-card-title>{{q.title}}</mat-card-title>
+  <mat-card class="question-card" *ngFor="let q of questions" >
+    <mat-card-title (click)="openQuestionEditor(q)">{{q.title}}</mat-card-title>
     <mat-card-subtitle>{{q.description}}</mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-subtitle>Question type:</mat-card-subtitle>
@@ -18,7 +21,9 @@
         <h4 class="item">{{qOption.weight}}</h4>
       </div>
     </div>
-
+    <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="deleteQuestion(q.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
   </mat-card>
 
   <button mat-raised-button color="primary" (click)="addBlanckQuestion(questions)">+ tilføj spørgsmål</button>

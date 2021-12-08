@@ -19,16 +19,23 @@ export class FormEditorComponent implements OnInit {
   questions$: Observable<FormQuestionDto[]> | undefined
   questionTypes: QuestionTypeDto[] | undefined
 
+  deletedQuestion: FormQuestionDto| undefined
+
   constructor(private _qServ: QuestionService, private _qTServ: QuestionTypesService, private router: Router) { }
 
   ngOnInit(): void {
-    this.questions$ = this._qServ.getQuestions();
+    this.updateListQuestions();
     this.questionTypes = this._qTServ.getLitTypes();
     /*this._qServ.getProducts().subscribe( (questionList) => {
       this.questions$ = questionList;
 
       console.table(this.questions$)
     });*/
+  }
+
+  updateListQuestions(): void{
+    this.questions$ = this._qServ.getQuestions();
+    console.log("Called update method")
   }
 
   addBlanckQuestion( list: FormQuestionDto[]): void{
@@ -58,6 +65,13 @@ export class FormEditorComponent implements OnInit {
     }else {
       this.router.navigate(['questionEditor/'+question.id])
     }
+  }
+
+  deleteQuestion(id: number):void{
+    this._qServ.deleteQuestion(id).subscribe((q) => {
+      this.deletedQuestion = q;
+      this.updateListQuestions()
+    })
 
   }
 
