@@ -66,6 +66,6 @@ export class QuestionEditorComponent implements OnInit {
        this.router.navigate(['formEditor'])
      })
 
-    // starting on update functionality
+    // starting on delete functionality
   }
 }
