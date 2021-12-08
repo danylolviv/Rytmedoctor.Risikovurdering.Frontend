@@ -19,6 +19,7 @@ export class QuestionEditorComponent implements OnInit {
   private questionId: number = 0
   public question$: Observable<FormQuestionDto> | undefined
   public updatedQuestion$: Observable<FormQuestionDto>| undefined
+  public updatedQuestion: FormQuestionDto | undefined
   questionTypes: QuestionTypeDto[] | undefined
 
   public id: number|undefined
@@ -59,8 +60,12 @@ export class QuestionEditorComponent implements OnInit {
         answerOptions: answerOptions,
         orderId: orderId
       } as FormQuestionDto;
-    this.updatedQuestion$ = this._qServ.saveQuestion(newQuestion)
-    //this.router.navigate(['formEditor'])
+     this._qServ.saveQuestion(newQuestion).subscribe((updatedQuestion) =>{
+       this.updatedQuestion = updatedQuestion;
+       // todo add delay here and display updated question
+       this.router.navigate(['formEditor'])
+     })
+
     // starting on update functionality
   }
 }
