@@ -3,24 +3,22 @@
   height: fit-content;
   margin-top: 3%;
 }
-.container{
+.optionBlock{
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
 }
 
-.formHolder{
+.formHolder {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.buttonContainer{
-  display: flex;
-  justify-content: space-between;
+.optionItem{
+  margin: 12px;
 }
+
 .actionButton{
   margin-top: 30px;
   margin-bottom: 20%;
 }
-
-
