@@ -21,6 +21,8 @@ export class FormEditorComponent implements OnInit {
 
   deletedQuestion: FormQuestionDto| undefined
 
+  listQuestions: FormQuestionDto[]|undefined
+
   constructor(private _qServ: QuestionService, private _qTServ: QuestionTypesService, private router: Router) { }
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class FormEditorComponent implements OnInit {
   }
 
   addBlanckQuestion( list: FormQuestionDto[]): void{
+    this.listQuestions = list;
     // let blanckListOpt: AnswerOptionDto[] =  [];
     //
     // blanckListOpt.push({optionText: "Option", weight: 0})
@@ -68,10 +71,16 @@ export class FormEditorComponent implements OnInit {
   }
 
   deleteQuestion(id: number):void{
-    this._qServ.deleteQuestion(id).subscribe((q) => {
-      this.deletedQuestion = q;
-      this.updateListQuestions()
-    })
+    console.log(id)
+    if (id === undefined){
+      this.listQuestions?.pop()
+    }else {
+      this._qServ.deleteQuestion(id).subscribe((q) => {
+        this.deletedQuestion = q;
+        this.updateListQuestions()
+      })
+    }
+
 
   }
 
