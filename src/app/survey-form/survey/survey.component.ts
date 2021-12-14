@@ -17,7 +17,7 @@ export class SurveyComponent implements OnInit {
 
   public questionAnswersCheckbox = new Map<number, boolean>()
   public questionAnswersDropdown = new Map<number, AnswerOptionDto>()
-  public questionAnswersRadio = new Map<number, boolean>()
+  public questionAnswersRadio = new Map<number, AnswerOptionDto>()
 
   questions$: Observable<FormQuestionDto[]> | undefined
 
@@ -38,7 +38,8 @@ export class SurveyComponent implements OnInit {
             if (q.type.id == 1) {
               //radio button
               q.answerOptions.forEach(opt => {
-                this.questionAnswersRadio.set(opt.id ? opt.id : -1, opt.selected ? opt.selected : false)
+                opt.questionId = q.id;
+                this.questionAnswersRadio.set(opt.id ? opt.id : -1, opt)
               })
             }
             if (q.type.id == 2) {
@@ -55,30 +56,50 @@ export class SurveyComponent implements OnInit {
   }
 
   submit() {
-
+    console.log("Radio")
+    this.questionAnswersRadio.forEach(op =>{
+      console.log(op.optionText + ' ' + op.selected)
+    })
+    console.log("Dropdown")
+    this.questionAnswersDropdown.forEach( op =>{
+      console.log(op.optionText + ' ' + op.selected)
+    })
+    console.log("Checkbox")
+    console.table(this.questionAnswersCheckbox)
   }
 
   changeOptionValueCheckbox($event: MatCheckboxChange, o: AnswerOptionDto) {
     this.questionAnswersCheckbox.set(o.id ? o.id : -1, $event.checked)
-    console.table(this.questionAnswersCheckbox)
+    //console.table(this.questionAnswersCheckbox)
   }
 
-  changeOptionValueRadio($event: MatRadioChange, o: AnswerOptionDto) {
-    this.questionAnswersRadio.set(o.id ? o.id : -1, true)
-    console.table(this.questionAnswersRadio)
+  changeOptionValueRadio($event: MatRadioChange, o: AnswerOptionDto, questionId: number) {
+    this.questionAnswersRadio.forEach( op => {
+      if (op.questionId == questionId && op.selected){
+        op.selected = false
+      }
+    })
+    this.questionAnswersRadio.forEach(op => {
+      if (op.id == o.id){
+        op.selected = true;
+      }
+    })
   }
 
-  changeOptionValueDropdown($event: MatOptionSelectionChange, o: AnswerOptionDto) {
+  changeOptionValueDropdown($event: MatOptionSelectionChange, o: AnswerOptionDto, questionId: number) {
 
     if ($event.isUserInput){
       o.selected = true;
       this.questionAnswersDropdown.forEach(op => {
-        // if(op.blablabla){
-        //
-        // }
+        if(questionId == op.questionId && op.selected){
+          op.selected = false;
+        }
       })
-      this.questionAnswersDropdown.set(o.id ? o.id : -1, o)
+      this.questionAnswersDropdown.forEach(op => {
+        if(op.id == o.id){
+          op.selected = true;
+        }
+      })
     }
-
   }
 }
