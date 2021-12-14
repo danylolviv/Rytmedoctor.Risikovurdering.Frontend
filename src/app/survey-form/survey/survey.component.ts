@@ -6,6 +6,7 @@ import {tap} from "rxjs/operators";
 import {AnswerOptionDto} from "../../form-editor/shared/answer-option-dto";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {MatRadioChange} from "@angular/material/radio";
+import {MatOptionSelectionChange} from "@angular/material/core";
 
 @Component({
   selector: 'app-survey',
@@ -15,7 +16,7 @@ import {MatRadioChange} from "@angular/material/radio";
 export class SurveyComponent implements OnInit {
 
   public questionAnswersCheckbox = new Map<number, boolean>()
-  public questionAnswersDropdown = new Map<number, boolean>()
+  public questionAnswersDropdown = new Map<number, AnswerOptionDto>()
   public questionAnswersRadio = new Map<number, boolean>()
 
   questions$: Observable<FormQuestionDto[]> | undefined
@@ -43,7 +44,8 @@ export class SurveyComponent implements OnInit {
             if (q.type.id == 2) {
               // dropdown
               q.answerOptions.forEach(opt => {
-                this.questionAnswersDropdown.set(opt.id ? opt.id : -1, opt.selected ? opt.selected : false)
+                opt.questionId = q.id;
+                this.questionAnswersDropdown.set(opt.id ? opt.id : -1, opt)
               })
             }
           })
@@ -66,8 +68,17 @@ export class SurveyComponent implements OnInit {
     console.table(this.questionAnswersRadio)
   }
 
-  changeOptionValueDropdown($event: Event, o: AnswerOptionDto) {
-    this.questionAnswersDropdown.set(o.id ? o.id : -1, true)
-    console.table(this.questionAnswersDropdown)
+  changeOptionValueDropdown($event: MatOptionSelectionChange, o: AnswerOptionDto) {
+
+    if ($event.isUserInput){
+      o.selected = true;
+      this.questionAnswersDropdown.forEach(op => {
+        // if(op.blablabla){
+        //
+        // }
+      })
+      this.questionAnswersDropdown.set(o.id ? o.id : -1, o)
+    }
+
   }
 }

@@ -12,7 +12,7 @@
     <mat-form-field *ngIf="q.type.id == 2" appearance="fill">
       <mat-label>Your Answer</mat-label>
       <mat-select>
-        <mat-option *ngFor="let o of q.answerOptions" (selectionchange)="changeOptionValueDropdown($event, o)" [value]="o.id">
+        <mat-option *ngFor="let o of q.answerOptions" (onSelectionChange)="changeOptionValueDropdown($event, o)" [value]="o.id">
           {{o.optionText}} || weight {{o.weight}}
         </mat-option>
       </mat-select>
