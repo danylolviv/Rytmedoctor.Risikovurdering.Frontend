@@ -4,6 +4,8 @@ import {FormEditorComponent} from "./form-editor/form-editor.component";
 
 import { RouterModule } from '@angular/router';
 import {QuestionEditorComponent} from "./question-editor/question-editor.component";
+import {AuthGuard} from "../auth/guards/auth.guard";
+import {OrderManagerComponent} from "./order-manager/order-manager.component";
 
 
 const routes = [
@@ -13,7 +15,12 @@ const routes = [
   },
   {
     path: 'questionEditor/:id',
-    component: QuestionEditorComponent
+    component: QuestionEditorComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'order',
+    component: OrderManagerComponent
   }
 ];
 

@@ -16,6 +16,11 @@ const routes: Routes = [
     path:"survey",
     loadChildren: () => import('./survey-form/survey-form.module')
       .then(f => f.SurveyFormModule)
+  },
+  {
+    path:"auth",
+    loadChildren: () => import('./auth/auth.module')
+      .then(a => a.AuthModule)
   }
 ];
 

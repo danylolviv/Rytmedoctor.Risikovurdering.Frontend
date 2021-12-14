@@ -5,4 +5,6 @@ export class AnswerOptionDto {
   optionText: string;
   // @ts-ignore
   weight: number;
+
+  selected?: boolean;
 }

@@ -1,0 +1,6 @@
+<div class="question-container">
+  <div cdkDropList class="list-questions" (cdkDropListDropped)="drop($event)">
+    <div class="queston-box" *ngFor="let q of questions" cdkDrag>{{q.title}}</div>
+  </div>
+
+</div>

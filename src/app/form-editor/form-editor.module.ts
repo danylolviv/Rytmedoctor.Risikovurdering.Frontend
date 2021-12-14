@@ -17,6 +17,8 @@ import {CommonModule} from "@angular/common";
 import {QuestionEditorComponent} from "./question-editor/question-editor.component";
 import {MatIconModule} from "@angular/material/icon";
 import {FormsModule} from "@angular/forms";
+import { OrderManagerComponent } from './order-manager/order-manager.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 
 
@@ -33,13 +35,15 @@ import {FormsModule} from "@angular/forms";
     MatTableModule,
     MatDividerModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   providers: [],
   exports: [],
   declarations: [
     FormEditorComponent,
-    QuestionEditorComponent
+    QuestionEditorComponent,
+    OrderManagerComponent
   ]
 })
 export class FormEditorModule { }
