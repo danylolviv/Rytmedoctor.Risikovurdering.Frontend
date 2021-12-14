@@ -63,7 +63,7 @@ export class SurveyComponent implements OnInit {
     console.log("in the submit")
     console.log(this.questionAnswersCheckbox)
     questionsFromForm.forEach(q =>{
-      if (q.type.id == 1){
+      if (q.type.id == 3){
         q.answerOptions.forEach( op =>{
 
           console.log(op.id)
@@ -74,11 +74,13 @@ export class SurveyComponent implements OnInit {
     var userAnswer = {username: "superuser", listAnswerPairs: []} as UserAnswerDto;
     questionsFromForm.forEach(question => {
       // choicebox
-      if(question.type.id == 1){
+      if(question.type.id == 3){
         question.answerOptions.forEach(option =>{
           if (option.id){
-            console.log("been here")
+            console.log("just before if statment" + option.id)
+            console.log(this.questionAnswersCheckbox.get(option.id))
             if (this.questionAnswersCheckbox.get(option.id)){
+              console.log("been here")
               var pair = {answer: option.optionText, question: question.title} as AnswerPair
               userAnswer.listAnswerPairs.push(pair);
             }
@@ -99,6 +101,7 @@ export class SurveyComponent implements OnInit {
   }
 
   changeOptionValueCheckbox($event: MatCheckboxChange, o: AnswerOptionDto) {
+    console.table(o)
     this.questionAnswersCheckbox.set(o.id ? o.id : -1, $event.checked)
     console.log("printing from checkin box")
     console.log(this.questionAnswersCheckbox)
