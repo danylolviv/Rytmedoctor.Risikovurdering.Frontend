@@ -7,6 +7,8 @@ import {AnswerOptionDto} from "../../form-editor/shared/answer-option-dto";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {MatRadioChange} from "@angular/material/radio";
 import {MatOptionSelectionChange} from "@angular/material/core";
+import {UserAnswerDto} from "../shared/user-answer-dto";
+import {AnswerPair} from "../shared/answer-pair";
 
 @Component({
   selector: 'app-survey',
@@ -31,7 +33,9 @@ export class SurveyComponent implements OnInit {
           qList.forEach(q => {
             if (q.type.id == 3) {
               // checkbox
+              console.log("hash table init")
               q.answerOptions.forEach(opt => {
+                console.table(opt)
                 this.questionAnswersCheckbox.set(opt.id ? opt.id : -1, opt.selected ? opt.selected : false)
               })
             }
@@ -55,21 +59,49 @@ export class SurveyComponent implements OnInit {
 
   }
 
-  submit() {
-    console.log("Radio")
-    this.questionAnswersRadio.forEach(op =>{
-      console.log(op.optionText + ' ' + op.selected)
+  submit(questionsFromForm: FormQuestionDto[]) {
+    console.log("in the submit")
+    console.log(this.questionAnswersCheckbox)
+    questionsFromForm.forEach(q =>{
+      if (q.type.id == 1){
+        q.answerOptions.forEach( op =>{
+
+          console.log(op.id)
+          console.log(this.questionAnswersCheckbox.get(op.id ? op.id : -1))
+        })
+      }
     })
-    console.log("Dropdown")
-    this.questionAnswersDropdown.forEach( op =>{
-      console.log(op.optionText + ' ' + op.selected)
+    var userAnswer = {username: "superuser", listAnswerPairs: []} as UserAnswerDto;
+    questionsFromForm.forEach(question => {
+      // choicebox
+      if(question.type.id == 1){
+        question.answerOptions.forEach(option =>{
+          if (option.id){
+            console.log("been here")
+            if (this.questionAnswersCheckbox.get(option.id)){
+              var pair = {answer: option.optionText, question: question.title} as AnswerPair
+              userAnswer.listAnswerPairs.push(pair);
+            }
+          }
+        })
+
+      }
+      //dropdown
+      if(question.type.id == 2){
+
+      }
+      //radio
+      if(question.type.id == 3){
+
+      }
     })
-    console.log("Checkbox")
-    console.table(this.questionAnswersCheckbox)
+    console.table(userAnswer)
   }
 
   changeOptionValueCheckbox($event: MatCheckboxChange, o: AnswerOptionDto) {
     this.questionAnswersCheckbox.set(o.id ? o.id : -1, $event.checked)
+    console.log("printing from checkin box")
+    console.log(this.questionAnswersCheckbox)
     //console.table(this.questionAnswersCheckbox)
   }
 
