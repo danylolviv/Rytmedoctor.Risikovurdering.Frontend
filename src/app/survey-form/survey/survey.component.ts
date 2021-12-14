@@ -5,6 +5,7 @@ import {FormQuestionDto} from "../../form-editor/shared/form-question-dto";
 import {tap} from "rxjs/operators";
 import {AnswerOptionDto} from "../../form-editor/shared/answer-option-dto";
 import {MatCheckboxChange} from "@angular/material/checkbox";
+import {MatRadioChange} from "@angular/material/radio";
 
 @Component({
   selector: 'app-survey',
@@ -15,7 +16,7 @@ export class SurveyComponent implements OnInit {
 
   public questionAnswersCheckbox = new Map<number, boolean>()
   public questionAnswersDropdown = new Map<number, boolean>()
-  public questionAnswersMultiSelect = new Map<number, boolean>()
+  public questionAnswersRadio = new Map<number, boolean>()
 
   questions$: Observable<FormQuestionDto[]> | undefined
 
@@ -28,17 +29,23 @@ export class SurveyComponent implements OnInit {
         tap(qList => {
           qList.forEach(q => {
             if (q.type.id == 3) {
+              // checkbox
               q.answerOptions.forEach(opt => {
                 this.questionAnswersCheckbox.set(opt.id ? opt.id : -1, opt.selected ? opt.selected : false)
               })
             }
             if (q.type.id == 1) {
               //radio button
+              q.answerOptions.forEach(opt => {
+                this.questionAnswersRadio.set(opt.id ? opt.id : -1, opt.selected ? opt.selected : false)
+              })
             }
             if (q.type.id == 2) {
               // dropdown
+              q.answerOptions.forEach(opt => {
+                this.questionAnswersDropdown.set(opt.id ? opt.id : -1, opt.selected ? opt.selected : false)
+              })
             }
-
           })
         })
       );
@@ -49,8 +56,18 @@ export class SurveyComponent implements OnInit {
 
   }
 
-  changeOptionValue($event: MatCheckboxChange, o: AnswerOptionDto) {
+  changeOptionValueCheckbox($event: MatCheckboxChange, o: AnswerOptionDto) {
     this.questionAnswersCheckbox.set(o.id ? o.id : -1, $event.checked)
     console.table(this.questionAnswersCheckbox)
+  }
+
+  changeOptionValueRadio($event: MatRadioChange, o: AnswerOptionDto) {
+    this.questionAnswersRadio.set(o.id ? o.id : -1, true)
+    console.table(this.questionAnswersRadio)
+  }
+
+  changeOptionValueDropdown($event: Event, o: AnswerOptionDto) {
+    this.questionAnswersDropdown.set(o.id ? o.id : -1, true)
+    console.table(this.questionAnswersDropdown)
   }
 }
