@@ -1,1 +1,10 @@
+<a routerLink="">Home</a>
+<a routerLink="formEditor">Form Editor</a>
+<a routerLink="survey">Survey</a>
+<a routerLink="formEditor/order">Order</a>
+<a routerLink="auth/login" *ngIf="!jwt else logoutTemplate">Login page</a>
+<ng-template #logoutTemplate>
+  <a [routerLink]="[]" (click)="logout()">Logout</a>
+</ng-template>
+
 <router-outlet></router-outlet>
