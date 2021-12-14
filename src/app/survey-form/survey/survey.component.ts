@@ -19,22 +19,23 @@ export class SurveyComponent implements OnInit {
 
   questions$: Observable<FormQuestionDto[]> | undefined
 
-  constructor(private _qService: QuestionService) { }
+  constructor(private _qService: QuestionService) {
+  }
 
   ngOnInit(): void {
     this.questions$ = this._qService.getQuestions()
       .pipe(
         tap(qList => {
           qList.forEach(q => {
-            if (q.type.id == 3){
-              q.answerOptions.forEach( opt => {
-                this.questionAnswersCheckbox.set(opt.id? opt.id: -1, opt.selected? opt.selected:false)
+            if (q.type.id == 3) {
+              q.answerOptions.forEach(opt => {
+                this.questionAnswersCheckbox.set(opt.id ? opt.id : -1, opt.selected ? opt.selected : false)
               })
             }
-            if (q.type.id == 1){
+            if (q.type.id == 1) {
               //radio button
             }
-            if (q.type.id == 2){
+            if (q.type.id == 2) {
               // dropdown
             }
 
@@ -49,7 +50,7 @@ export class SurveyComponent implements OnInit {
   }
 
   changeOptionValue($event: MatCheckboxChange, o: AnswerOptionDto) {
-    this.questionAnswersCheckbox.set(o.id? o.id: -1, $event.checked)
+    this.questionAnswersCheckbox.set(o.id ? o.id : -1, $event.checked)
     console.table(this.questionAnswersCheckbox)
   }
 }
