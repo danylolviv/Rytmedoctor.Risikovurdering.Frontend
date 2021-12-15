@@ -32,16 +32,16 @@ export class SurveyComponent implements OnInit {
         tap(qList => {
           qList.forEach(q => {
             if (q.type.id == 3) {
-              // checkbox
-              console.log("hash table init")
+              // checkbox (can select multiple)
               q.answerOptions.forEach(opt => {
-                console.table(opt)
                 this.questionAnswersCheckbox.set(opt.id ? opt.id : -1, opt.selected ? opt.selected : false)
               })
             }
             if (q.type.id == 1) {
               //radio button
+
               q.answerOptions.forEach(opt => {
+                //console.log(opt)
                 opt.questionId = q.id;
                 this.questionAnswersRadio.set(opt.id ? opt.id : -1, opt)
               })
@@ -49,6 +49,7 @@ export class SurveyComponent implements OnInit {
             if (q.type.id == 2) {
               // dropdown
               q.answerOptions.forEach(opt => {
+                console.log(opt)
                 opt.questionId = q.id;
                 this.questionAnswersDropdown.set(opt.id ? opt.id : -1, opt)
               })
@@ -60,29 +61,28 @@ export class SurveyComponent implements OnInit {
   }
 
   submit(questionsFromForm: FormQuestionDto[]) {
-    console.log("in the submit")
-    console.log(this.questionAnswersCheckbox)
-    questionsFromForm.forEach(q =>{
-      if (q.type.id == 3){
-        q.answerOptions.forEach( op =>{
-
-          console.log(op.id)
-          console.log(this.questionAnswersCheckbox.get(op.id ? op.id : -1))
-        })
-      }
-    })
+    // console.log("in the submit")
+    // console.log(this.questionAnswersCheckbox)
+    // questionsFromForm.forEach(q =>{
+    //   if (q.type.id == 3){
+    //     q.answerOptions.forEach( op =>{
+    //
+    //       console.log(op.id)
+    //       console.log(this.questionAnswersCheckbox.get(op.id ? op.id : -1))
+    //     })
+    //   }
+    // })
     var userAnswer = {username: "superuser", listAnswerPairs: []} as UserAnswerDto;
     questionsFromForm.forEach(question => {
-      // choicebox
+      // choicebox multiple answers acceptable
       if(question.type.id == 3){
         question.answerOptions.forEach(option =>{
           if (option.id){
-            console.log("just before if statment" + option.id)
-            console.log(this.questionAnswersCheckbox.get(option.id))
+            //console.log("just before if statment" + option.id)
+            //console.log(this.questionAnswersCheckbox.get(option.id))
             if (this.questionAnswersCheckbox.get(option.id)){
-              console.log("been here")
-              var pair = {answer: option.optionText, question: question.title} as AnswerPair
-              userAnswer.listAnswerPairs.push(pair);
+              //console.log("been here")
+              userAnswer.listAnswerPairs.push({answer: option.optionText, question: question.title});
             }
           }
         })
@@ -90,27 +90,43 @@ export class SurveyComponent implements OnInit {
       }
       //dropdown
       if(question.type.id == 2){
-
+        console.table(question)
+        question.answerOptions.forEach(option =>{
+            // @ts-ignore
+            if (this.questionAnswersDropdown.get(option.id).selected){
+              userAnswer.listAnswerPairs.push({answer: option.optionText, question: question.title});
+            }
+        })
       }
       //radio
       if(question.type.id == 3){
-
+        // console.table(question)
+        // if (question.id != 1){
+        //   question.answerOptions.forEach(option =>{
+        //     // @ts-ignore
+        //     if (this.questionAnswersRadio.get(option.id).selected){
+        //       userAnswer.listAnswerPairs.push({answer: option.optionText, question: question.title});
+        //     }
+        //   })
+        // }
       }
     })
     console.table(userAnswer)
   }
 
   changeOptionValueCheckbox($event: MatCheckboxChange, o: AnswerOptionDto) {
-    console.table(o)
+    //console.table(o)
     this.questionAnswersCheckbox.set(o.id ? o.id : -1, $event.checked)
-    console.log("printing from checkin box")
-    console.log(this.questionAnswersCheckbox)
+    //console.log("printing from checkin box")
+    //console.log(this.questionAnswersCheckbox)
     //console.table(this.questionAnswersCheckbox)
   }
 
   changeOptionValueRadio($event: MatRadioChange, o: AnswerOptionDto, questionId: number) {
+
     this.questionAnswersRadio.forEach( op => {
-      if (op.questionId == questionId && op.selected){
+      console.log(op)
+      if (op.questionId == questionId){
         op.selected = false
       }
     })
@@ -122,11 +138,10 @@ export class SurveyComponent implements OnInit {
   }
 
   changeOptionValueDropdown($event: MatOptionSelectionChange, o: AnswerOptionDto, questionId: number) {
-
     if ($event.isUserInput){
       o.selected = true;
       this.questionAnswersDropdown.forEach(op => {
-        if(questionId == op.questionId && op.selected){
+        if(questionId == op.questionId){
           op.selected = false;
         }
       })
