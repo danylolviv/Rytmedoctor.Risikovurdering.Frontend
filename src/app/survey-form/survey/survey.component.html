@@ -4,20 +4,20 @@
     <mat-card-title>{{q.title}}</mat-card-title>
     <mat-card-subtitle>{{q.description}}</mat-card-subtitle>
     <div class="optionBlock" *ngIf="q.type.id == 3">
-      <mat-checkbox  *ngFor="let o of q.answerOptions"  (change)="changeOptionValue($event, o)" class="optionItem">{{o.optionText}}  ||  weight: {{o.weight}}</mat-checkbox>
+      <mat-checkbox *ngFor="let o of q.answerOptions" (change)="changeOptionValueCheckbox($event, o)" class="optionItem">{{o.optionText}}  ||  weight: {{o.weight}}</mat-checkbox>
     </div>
     <mat-radio-group class="optionBlock" *ngIf="q.type.id == 1" aria-label="Select one of the options">
-      <mat-radio-button  class="optionItem" *ngFor="let o of q.answerOptions" [value]="o.id">{{o.optionText}}  ||  weight: {{o.weight}}</mat-radio-button>
+      <mat-radio-button  class="optionItem" *ngFor="let o of q.answerOptions" (change)="changeOptionValueRadio($event, o, q.id)" [value]="o.id">{{o.optionText}}  ||  weight: {{o.weight}}</mat-radio-button>
     </mat-radio-group>
     <mat-form-field *ngIf="q.type.id == 2" appearance="fill">
       <mat-label>Your Answer</mat-label>
       <mat-select>
-        <mat-option *ngFor="let o of q.answerOptions" [value]="o.id">
+        <mat-option *ngFor="let o of q.answerOptions" (onSelectionChange)="changeOptionValueDropdown($event, o,q.id)" [value]="o.id">
           {{o.optionText}} || weight {{o.weight}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card>
-  <button mat-raised-button class="actionButton" color="primary" (click)="submit()" >Submit form</button>
+  <button mat-raised-button class="actionButton" color="primary" (click)="submit(questions)" >Submit form</button>
 </div>
 

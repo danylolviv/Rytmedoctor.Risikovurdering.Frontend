@@ -16,7 +16,7 @@ const routes = [
   {
     path: 'questionEditor/:id',
     component: QuestionEditorComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'order',
