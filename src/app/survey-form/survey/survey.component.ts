@@ -9,6 +9,7 @@ import {MatRadioChange} from "@angular/material/radio";
 import {MatOptionSelectionChange} from "@angular/material/core";
 import {UserAnswerDto} from "../shared/user-answer-dto";
 import {AnswerPair} from "../shared/answer-pair";
+import {SurveyService} from "../shared/survey.service";
 
 @Component({
   selector: 'app-survey',
@@ -23,7 +24,7 @@ export class SurveyComponent implements OnInit {
 
   questions$: Observable<FormQuestionDto[]> | undefined
 
-  constructor(private _qService: QuestionService) {
+  constructor(private _qService: QuestionService, private _surveyServ: SurveyService) {
   }
 
   ngOnInit(): void {
@@ -39,9 +40,7 @@ export class SurveyComponent implements OnInit {
             }
             if (q.type.id == 1) {
               //radio button
-
               q.answerOptions.forEach(opt => {
-                //console.log(opt)
                 opt.questionId = q.id;
                 this.questionAnswersRadio.set(opt.id ? opt.id : -1, opt)
               })
@@ -49,7 +48,6 @@ export class SurveyComponent implements OnInit {
             if (q.type.id == 2) {
               // dropdown
               q.answerOptions.forEach(opt => {
-                console.log(opt)
                 opt.questionId = q.id;
                 this.questionAnswersDropdown.set(opt.id ? opt.id : -1, opt)
               })
@@ -61,25 +59,12 @@ export class SurveyComponent implements OnInit {
   }
 
   submit(questionsFromForm: FormQuestionDto[]) {
-    // console.log("in the submit")
-    // console.log(this.questionAnswersCheckbox)
-    // questionsFromForm.forEach(q =>{
-    //   if (q.type.id == 3){
-    //     q.answerOptions.forEach( op =>{
-    //
-    //       console.log(op.id)
-    //       console.log(this.questionAnswersCheckbox.get(op.id ? op.id : -1))
-    //     })
-    //   }
-    // })
     var userAnswer = {username: "superuser", listAnswerPairs: []} as UserAnswerDto;
     questionsFromForm.forEach(question => {
       // choicebox multiple answers acceptable
       if(question.type.id == 3){
         question.answerOptions.forEach(option =>{
           if (option.id){
-            //console.log("just before if statment" + option.id)
-            //console.log(this.questionAnswersCheckbox.get(option.id))
             if (this.questionAnswersCheckbox.get(option.id)){
               //console.log("been here")
               userAnswer.listAnswerPairs.push({answer: option.optionText, question: question.title});
@@ -99,33 +84,30 @@ export class SurveyComponent implements OnInit {
         })
       }
       //radio
-      if(question.type.id == 3){
-        // console.table(question)
-        // if (question.id != 1){
-        //   question.answerOptions.forEach(option =>{
-        //     // @ts-ignore
-        //     if (this.questionAnswersRadio.get(option.id).selected){
-        //       userAnswer.listAnswerPairs.push({answer: option.optionText, question: question.title});
-        //     }
-        //   })
-        // }
+      if(question.type.id == 1){
+        if (question.id != 1){
+          question.answerOptions.forEach(option =>{
+            // @ts-ignore
+            if (this.questionAnswersRadio.get(option.id).selected){
+              userAnswer.listAnswerPairs.push({answer: option.optionText, question: question.title});
+            }
+          })
+        }
       }
     })
     console.table(userAnswer)
+    this._surveyServ.submitForm(userAnswer).subscribe(ans => {
+      console.log("Sending of the survey went: "+ ans)
+    })
+
   }
 
   changeOptionValueCheckbox($event: MatCheckboxChange, o: AnswerOptionDto) {
-    //console.table(o)
     this.questionAnswersCheckbox.set(o.id ? o.id : -1, $event.checked)
-    //console.log("printing from checkin box")
-    //console.log(this.questionAnswersCheckbox)
-    //console.table(this.questionAnswersCheckbox)
   }
 
   changeOptionValueRadio($event: MatRadioChange, o: AnswerOptionDto, questionId: number) {
-
     this.questionAnswersRadio.forEach( op => {
-      console.log(op)
       if (op.questionId == questionId){
         op.selected = false
       }
