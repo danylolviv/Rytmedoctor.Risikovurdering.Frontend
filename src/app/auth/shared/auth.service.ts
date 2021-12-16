@@ -26,7 +26,6 @@ export class AuthService {
           if (token && token.jwt){
             localStorage.setItem(jwtToken, token.jwt)
             this.isLoggedIn$.next(token.jwt)
-
           }else{
             this.logout();
           }

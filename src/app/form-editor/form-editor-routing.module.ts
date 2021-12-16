@@ -11,12 +11,12 @@ import {OrderManagerComponent} from "./order-manager/order-manager.component";
 const routes = [
   {
     path: '',
-    component: FormEditorComponent
+    component: FormEditorComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'questionEditor/:id',
     component: QuestionEditorComponent,
-    //canActivate: [AuthGuard]
   },
   {
     path: 'order',
