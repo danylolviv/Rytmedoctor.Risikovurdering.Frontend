@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable, of} from "rxjs";
 import {TokenDto} from "./token.dto";
 import {environment} from "../../../environments/environment";
 import {take, tap} from "rxjs/operators";
+import {AuthUserDto} from "./auth-user-dto";
 
 const jwtToken = "jwtToken";
 
@@ -26,7 +27,6 @@ export class AuthService {
           if (token && token.jwt){
             localStorage.setItem(jwtToken, token.jwt)
             this.isLoggedIn$.next(token.jwt)
-
           }else{
             this.logout();
           }
@@ -42,5 +42,9 @@ export class AuthService {
     localStorage.removeItem(jwtToken)
     this.isLoggedIn$.next(null)
     return  of(true).pipe(take(1))
+  }
+
+  createAuthUser(createAuthDto: AuthUserDto): Observable<AuthUserDto> {
+    return this._http.post<AuthUserDto>(environment.api + "/api/Auth/CreateUser", createAuthDto)
   }
 }

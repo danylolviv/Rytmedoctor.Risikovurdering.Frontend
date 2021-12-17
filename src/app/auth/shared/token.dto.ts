@@ -1,4 +1,4 @@
 export interface TokenDto {
   jwt: string;
-  mesaage: string;
+  message: string;
 }

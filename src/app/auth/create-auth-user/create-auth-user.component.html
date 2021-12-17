@@ -1,0 +1,12 @@
+<form [formGroup]="createUserForm" (ngSubmit)="createUser()">
+
+  <label for="username">Userame: </label>
+  <input id="username" type="text" formControlName="username" placeholder="username">
+  <button type="submit">Create</button>
+</form>
+<mat-error *ngIf="err">
+  <strong>{{err}}</strong>
+</mat-error>
+<div>
+  <strong style="color: lawngreen">{{message}}</strong>
+</div>

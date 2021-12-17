@@ -8,3 +8,8 @@
 
   <button type="submit">Login</button>
 </form>
+<mat-error *ngIf="err">
+  <strong>{{err}}</strong>
+
+</mat-error>
+{{localError | json}}
