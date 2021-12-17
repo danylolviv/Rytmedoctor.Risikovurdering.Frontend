@@ -33,6 +33,10 @@ export class LoginComponent implements OnInit {
   login() {
     const loginDto = this.loginForm.value as LoginDto
     this._authServ.login(loginDto)
+      .pipe(catchError( error =>{
+          this.err = error.error ? error.error: error.message();
+          return throwError(error);
+      }) )
       .subscribe(token => {
         console.table(token)
         console.log(token.message)

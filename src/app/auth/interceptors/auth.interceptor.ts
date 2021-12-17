@@ -17,15 +17,15 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this._authServ.getToken();
     if (token){
-      const authReq = request.clone({
+      request = request.clone({
         headers: request.headers.set('Authorization', 'Bearer ' + token)
       });
-      return next.handle(authReq);
     }
     return next.handle(request)
       .pipe(catchError( error =>{
-        if (error.status == 401)
-        console.table(error.error ? error.error: error.message())
+        if (error.status == 401){
+          console.log(error.error ? error.error: error.message())
+        }
         return throwError(error);
       }) )
   }
