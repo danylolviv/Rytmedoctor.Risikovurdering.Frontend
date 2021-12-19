@@ -23,21 +23,18 @@ export class FormEditorComponent implements OnInit {
 
   listQuestions: FormQuestionDto[]|undefined
 
-  constructor(private _qServ: QuestionService, private _qTServ: QuestionTypesService, private router: Router) { }
+  constructor(
+    private _qServ: QuestionService,
+    private _qTServ: QuestionTypesService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.updateListQuestions();
     this.questionTypes = this._qTServ.getLitTypes();
-    /*this._qServ.getProducts().subscribe( (questionList) => {
-      this.questions$ = questionList;
-
-      console.table(this.questions$)
-    });*/
   }
 
   updateListQuestions(): void{
     this.questions$ = this._qServ.getQuestions();
-    console.log("Called update method")
   }
 
   addBlanckQuestion( list: FormQuestionDto[]): void{

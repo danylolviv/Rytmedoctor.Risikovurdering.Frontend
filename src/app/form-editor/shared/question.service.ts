@@ -24,31 +24,6 @@ export class QuestionService {
   getQuestions(): Observable<FormQuestionDto[]>{
     return this._http
       .get<FormQuestionDto[]>("https://localhost:5001/api/Question");
-      /*.pipe(
-        map(formQuestions => {
-          //Select List C#
-          return formQuestions.map<FormQuestionDto>(q => {
-            return {
-              id: q.id,
-              title: q.title,
-              description:
-              q.description,
-              orderId: q.orderId,
-              type: q.type,
-              answerOptions: q.answerOptions?.map<AnswerOptionDto>(a => {
-                return {
-                  id: a.id,
-                  optionText: a.optionText,
-                  weight: a.weight
-                };
-              })
-            };
-          })
-        })
-      )*/
-
-    // todo data consitency
-    // todo promisses instead of observable
   }
 
   getQuestionById(id: number): Observable<FormQuestionDto>{
@@ -56,9 +31,7 @@ export class QuestionService {
         .get<FormQuestionDto>("https://localhost:5001/api/Question/"+id)
   }
 
-
   saveQuestion(newQuestion: FormQuestionDto): Observable<FormQuestionDto> {
-    console.log(newQuestion.description)
     return this._http
       .put<FormQuestionDto>("https://localhost:5001/api/Question/" + newQuestion.id, newQuestion)
   }

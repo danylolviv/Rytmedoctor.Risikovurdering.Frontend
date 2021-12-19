@@ -2,8 +2,10 @@
 <div *ngIf="deletedQuestion">
   <p>Successfully deleted question with id: {{deletedQuestion.id}}</p>
 </div>
+
 <ul class="formHolder" *ngIf="questions$ | async as questions else loadingTemplate">
   <mat-card class="question-card" *ngFor="let q of questions" >
+
     <mat-card-title>{{q.title}}</mat-card-title>
     <mat-card-subtitle>{{q.description}}</mat-card-subtitle>
     <mat-divider></mat-divider>

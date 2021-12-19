@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {MainViewComponent} from "./main-view/main-view.component";
+import {AuthGuard} from "./auth/guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -10,7 +11,9 @@ const routes: Routes = [
   {
     path:"formEditor",
     loadChildren: () => import('./form-editor/form-editor.module')
-      .then(f => f.FormEditorModule)
+      .then(f => f.FormEditorModule),
+    canActivate: [AuthGuard]
+
   },
   {
     path:"survey",
