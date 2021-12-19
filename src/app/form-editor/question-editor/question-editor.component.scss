@@ -1,11 +1,11 @@
 .question-card{
   width: fit-content;
   height: fit-content;
-  margin-top: 3%;
 }
 .container{
   display: flex;
   justify-content: space-around;
+  margin-bottom: 3%;
 }
 
 .contentHolder{
@@ -13,4 +13,21 @@
   justify-content: center;
 }
 
+#title{
+  width: 70%;
+  height: 25px;
+  margin-bottom: 5px;
+}
+#desc{
+  width: 70%;
+  height: 50px;
+  margin-bottom: 5px;
+}
 
+#option{
+width: 70%;
+}
+
+#weight{
+  width: 15%;
+}
