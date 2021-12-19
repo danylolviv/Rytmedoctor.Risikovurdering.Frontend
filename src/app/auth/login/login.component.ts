@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     const loginDto = this.loginForm.value as LoginDto
     if (this.inputIsvalid(loginDto)){
       this.wrongInput = false
-      this._authServ.login(loginDto)
+      this._authServ.login(loginDto, loginDto.username)
         .pipe(catchError( error =>{
           this.err = error.error ? error.error: error.message();
           return throwError(error);

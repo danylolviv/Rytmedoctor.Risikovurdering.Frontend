@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import {QuestionEditorComponent} from "./question-editor/question-editor.component";
 import {AuthGuard} from "../auth/guards/auth.guard";
 import {OrderManagerComponent} from "./order-manager/order-manager.component";
+import {AuthorizationGuard} from "../auth/guards/authorization.guard";
 
 
 const routes = [
@@ -20,7 +21,8 @@ const routes = [
   },
   {
     path: 'order',
-    component: OrderManagerComponent
+    component: OrderManagerComponent,
+    canActivate: [AuthorizationGuard]
   }
 ];
 

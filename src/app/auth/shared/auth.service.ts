@@ -8,6 +8,7 @@ import {take, tap} from "rxjs/operators";
 import {AuthUserDto} from "./auth-user-dto";
 
 const jwtToken = "jwtToken";
+const authorization = "username";
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,10 @@ export class AuthService {
 
   isLoggedIn$ = new BehaviorSubject<string | null>(this.getToken());
 
+
   constructor(private _http: HttpClient) { }
 
-  login(loginDto: LoginDto): Observable<TokenDto>{
+  login(loginDto: LoginDto, username: string): Observable<TokenDto>{
     return this._http
       // Angular HttpClient module is built so it will only "take(1), but there might be other 3rd party clients that do not do the same so you have to take care of possible memory leak"
       .post<TokenDto>(environment.api + "/api/Auth/Login", loginDto)
@@ -26,6 +28,8 @@ export class AuthService {
         tap( token => {
           if (token && token.jwt){
             localStorage.setItem(jwtToken, token.jwt)
+            if (username == "admin")
+            localStorage.setItem(authorization, username)
             this.isLoggedIn$.next(token.jwt)
           }else{
             this.logout();
@@ -40,6 +44,7 @@ export class AuthService {
 
   logout(): Observable<boolean> {
     localStorage.removeItem(jwtToken)
+    localStorage.removeItem(authorization)
     this.isLoggedIn$.next(null)
     return  of(true).pipe(take(1))
   }

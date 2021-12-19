@@ -1,5 +1,4 @@
 <div class="formHolder" *ngIf="questions$ | async as questions">
-  <p> To check if it works </p>
   <mat-card class="question-card" *ngFor="let q of questions">
     <mat-card-title>{{q.title}}</mat-card-title>
     <mat-card-subtitle>{{q.description}}</mat-card-subtitle>
