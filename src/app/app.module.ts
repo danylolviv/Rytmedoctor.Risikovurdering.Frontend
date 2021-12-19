@@ -8,6 +8,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormEditorModule} from "./form-editor/form-editor.module";
 import { MainViewComponent } from './main-view/main-view.component';
 import {AuthInterceptor} from "./auth/interceptors/auth.interceptor";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {AuthInterceptor} from "./auth/interceptors/auth.interceptor";
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormEditorModule
+    FormEditorModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
