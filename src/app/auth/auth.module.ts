@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { CreateAuthUserComponent } from './create-auth-user/create-auth-user.component';
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CreateAuthUserComponent } from './create-auth-user/create-auth-user.com
         CommonModule,
         AuthRoutingModule,
         ReactiveFormsModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatButtonModule
     ]
 })
 export class AuthModule { }

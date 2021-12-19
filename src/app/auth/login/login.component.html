@@ -1,18 +1,29 @@
 
-<form [formGroup]="loginForm" (ngSubmit)="login()">
 
-  <label for="username">Userame: </label>
-  <input id="username" type="text" formControlName="username" placeholder="username">
+<form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+  <div class="formContainer">
+<!--    <label for="username">Userame: </label>-->
+<!--    <input id="username" type="text" formControlName="username" placeholder="username">-->
 
-  <label for="password">password: </label>
-  <input id="password" type="password" formControlName="password">
+<!--    <label for="password">password: </label>-->
+<!--    <input id="password" type="password" formControlName="password">-->
 
-  <button type="submit">Login</button>
+    <div class="form__group field">
+      <input type="text" class="form__field"  placeholder="username" formControlName="username" >
+      <label  class="form__label">Username</label>
+    </div>
+
+    <div class="form__group field">
+      <input type="password" formControlName="password" class="form__field" placeholder="password">
+      <label class="form__label">Password</label>
+    </div>
+    <button mat-raised-button color="accent" type="submit">Login</button>
+    <mat-error *ngIf="err"><strong>{{err}}</strong></mat-error>
+    <mat-error *ngIf="wrongInput"><strong>{{wrongInputMessage}}</strong></mat-error>
+  </div>
+
 </form>
 
 
-<mat-error *ngIf="err">
-  <strong>{{err}}</strong>
 
-</mat-error>
 {{localError | json}}
