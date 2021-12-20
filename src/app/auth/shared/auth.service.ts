@@ -9,6 +9,7 @@ import {AuthUserDto} from "./auth-user-dto";
 
 const jwtToken = "jwtToken";
 const authorization = "username";
+const user = "user";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class AuthService {
             localStorage.setItem(jwtToken, token.jwt)
             if (username == "admin")
             localStorage.setItem(authorization, username)
+            localStorage.setItem(user, username)
             this.isLoggedIn$.next(token.jwt)
           }else{
             this.logout();
@@ -43,10 +45,15 @@ export class AuthService {
   }
 
   logout(): Observable<boolean> {
-    localStorage.removeItem(jwtToken)
-    localStorage.removeItem(authorization)
+    this.cleanLocalStorage();
     this.isLoggedIn$.next(null)
     return  of(true).pipe(take(1))
+  }
+
+  private cleanLocalStorage() {
+    localStorage.removeItem(jwtToken)
+    localStorage.removeItem(authorization)
+    localStorage.removeItem(user)
   }
 
   createAuthUser(createAuthDto: AuthUserDto): Observable<AuthUserDto> {

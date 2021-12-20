@@ -10,6 +10,7 @@ import {MatOptionSelectionChange} from "@angular/material/core";
 import {UserAnswerDto} from "../shared/user-answer-dto";
 import {AnswerPair} from "../shared/answer-pair";
 import {SurveyService} from "../shared/survey.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-survey',
@@ -24,7 +25,7 @@ export class SurveyComponent implements OnInit {
 
   questions$: Observable<FormQuestionDto[]> | undefined
 
-  constructor(private _qService: QuestionService, private _surveyServ: SurveyService) {
+  constructor(private _qService: QuestionService, private _surveyServ: SurveyService, private _router: Router) {
   }
 
   ngOnInit(): void {
@@ -59,7 +60,7 @@ export class SurveyComponent implements OnInit {
   }
 
   submit(questionsFromForm: FormQuestionDto[]) {
-    var userAnswer = {username: "superuser", listAnswerPairs: []} as UserAnswerDto;
+    var userAnswer = {username: localStorage.getItem("user"), listAnswerPairs: []} as UserAnswerDto;
     questionsFromForm.forEach(question => {
       // choicebox multiple answers acceptable
       if(question.type.id == 3){
@@ -97,7 +98,7 @@ export class SurveyComponent implements OnInit {
     })
     console.table(userAnswer)
     this._surveyServ.submitForm(userAnswer).subscribe(ans => {
-      console.log("Sending of the survey went: "+ ans)
+      this._router.navigateByUrl('')
     })
 
   }
