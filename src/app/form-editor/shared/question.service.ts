@@ -25,22 +25,22 @@ export class QuestionService {
 
   getQuestions(): Observable<FormQuestionDto[]>{
     return this._http
-      .get<FormQuestionDto[]>("https://localhost:5001/api/Question");
+      .get<FormQuestionDto[]>(environment.api +"/api/Question");
   }
 
   getQuestionById(id: number): Observable<FormQuestionDto>{
     return this._http
-        .get<FormQuestionDto>("https://localhost:5001/api/Question/"+id)
+        .get<FormQuestionDto>(environment.api +"/api/Question/"+id)
   }
 
   saveQuestion(newQuestion: FormQuestionDto): Observable<FormQuestionDto> {
     return this._http
-      .put<FormQuestionDto>("https://localhost:5001/api/Question/" + newQuestion.id, newQuestion)
+      .put<FormQuestionDto>(environment.api +"/api/Question/" + newQuestion.id, newQuestion)
   }
 
   deleteQuestion(id: number): Observable<FormQuestionDto> {
     return this._http
-      .delete<FormQuestionDto>("https://localhost:5001/api/Question/"+id);
+      .delete<FormQuestionDto>(environment.api +"/api/Question/"+id);
   }
 
   changeOrder(list: SurveyOrderDto[]):Observable<boolean> {
@@ -48,10 +48,3 @@ export class QuestionService {
       .post<boolean>(environment.api+"/api/Question/UpdatedQuestionOrder",list)
   }
 }
-
-// let blanckQuestion = {
-//   title: "Title",
-//   description: "description",
-//   type:  {id:1} as QuestionTypeDto,
-//   answerOptions: [{optionText: "example option", weight: 1}] as AnswerOptionDto[]
-// } as FormQuestionDto
