@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: "https://formbuildertutee.azurewebsites.net"
+  api: "http://localhost:4200"
 };
 
 /*
