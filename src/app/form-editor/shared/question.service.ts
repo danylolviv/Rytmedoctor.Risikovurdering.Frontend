@@ -7,6 +7,8 @@ import {Title} from "@angular/platform-browser";
 import {delay, map} from "rxjs/operators";
 import {AnswerOptionDto} from "./answer-option-dto";
 import {QuestionTypeDto} from "./question-type-dto";
+import {SurveyOrderDto} from "./survey-order-dto";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,11 @@ export class QuestionService {
   deleteQuestion(id: number): Observable<FormQuestionDto> {
     return this._http
       .delete<FormQuestionDto>("https://localhost:5001/api/Question/"+id);
+  }
+
+  changeOrder(list: SurveyOrderDto[]):Observable<boolean> {
+    return this._http
+      .post<boolean>(environment.api+"/api/Question/UpdatedQuestionOrder",list)
   }
 }
 

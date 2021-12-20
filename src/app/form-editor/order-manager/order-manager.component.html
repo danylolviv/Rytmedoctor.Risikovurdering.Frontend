@@ -2,5 +2,6 @@
   <div cdkDropList class="list-questions" (cdkDropListDropped)="drop($event)">
     <div class="queston-box" *ngFor="let q of questions" cdkDrag>{{q.title}}</div>
   </div>
+  <button mat-raised-button color="primary" (click)="submitOrder()">Save order</button>
 
 </div>

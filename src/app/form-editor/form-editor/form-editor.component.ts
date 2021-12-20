@@ -39,16 +39,6 @@ export class FormEditorComponent implements OnInit {
 
   addBlanckQuestion( list: FormQuestionDto[]): void{
     this.listQuestions = list;
-    // let blanckListOpt: AnswerOptionDto[] =  [];
-    //
-    // blanckListOpt.push({optionText: "Option", weight: 0})
-    // blanckListOpt.push({optionText: "Option", weight: 0})
-    // let blanck = {
-    //   title: "New Question",
-    //   description: "Description",
-    //   answerOptions: blanckListOpt,
-    //   type: {typeName: "BlanckType"}
-    // } as FormQuestionDto;
     let blanckN = {
        title: "New Question, Press to edit",
     } as FormQuestionDto;

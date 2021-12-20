@@ -10,21 +10,23 @@ import { MainViewComponent } from './main-view/main-view.component';
 import {AuthInterceptor} from "./auth/interceptors/auth.interceptor";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainViewComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormEditorModule,
-    MatToolbarModule,
-    MatButtonModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormEditorModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatTabsModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

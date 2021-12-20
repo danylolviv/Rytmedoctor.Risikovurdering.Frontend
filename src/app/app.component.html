@@ -13,6 +13,7 @@
 
 <ng-template #logoutTemplate>
   <a [routerLink]="[]" (click)="logout()"> <button mat-raised-button color="warn">Logout</button></a>
+  <a routerLink="auth/create"><button mat-raised-button color="primary">Create customer</button></a>
 </ng-template>
 
 <router-outlet></router-outlet>
