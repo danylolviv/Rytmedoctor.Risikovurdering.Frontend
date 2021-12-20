@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: "https://risikovurderinginteractiveform.azurewebsites.net"
+  api: "https://formbuildertutee.azurewebsites.net"
 };
 
 /*
