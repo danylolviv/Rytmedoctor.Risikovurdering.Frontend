@@ -57,6 +57,6 @@ export class AuthService {
   }
 
   createAuthUser(createAuthDto: AuthUserDto): Observable<AuthUserDto> {
-    return this._http.post<AuthUserDto>(environment.api + "/api/Auth/CreateUser", createAuthDto)
+    return this._http.post<AuthUserDto>("https://formbuildertutee.azurewebsites.net/api/Auth/CreateUser", createAuthDto)
   }
 }
