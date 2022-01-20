@@ -62,9 +62,9 @@ export class QuestionEditorComponent implements OnInit {
       } as FormQuestionDto;
      this._qServ.saveQuestion(newQuestion).subscribe((updatedQuestion) =>{
        this.updatedQuestion = updatedQuestion;
-       // todo add delay here and display updated question
        this.router.navigate(['formEditor'])
      })
+
 
     // starting on delete functionality
   }

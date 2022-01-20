@@ -43,10 +43,7 @@ export class FormEditorComponent implements OnInit {
        title: "New Question, Press to edit",
     } as FormQuestionDto;
 
-
     list.push(blanckN)
-
-    // todo complete the new fake question to avoid errors in the console
   }
 
   openQuestionEditor(question: FormQuestionDto): void{
