@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {MainViewComponent} from "./main-view/main-view.component";
 import {AuthGuard} from "./auth/guards/auth.guard";
 import {AuthorizationGuard} from "./auth/guards/authorization.guard";
+import {AboutUsComponent} from "./about-us/about-us.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module')
       .then(a => a.AuthModule)
   },
+  {
+    path: 'about',
+    component: AboutUsComponent
+  }
 
 ];
 

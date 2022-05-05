@@ -1,19 +1,19 @@
-<mat-toolbar class="navbar" >
-  <mat-toolbar-row>
-    <button mat-button>Risikivurdering</button>
-    <div class="example-button-row">
-      <a routerLink=""><button mat-raised-button color="accent">Home</button></a>
-      <a routerLink="formEditor"><button mat-raised-button color="accent">Form Editor</button></a>
-      <a routerLink="survey"><button mat-raised-button color="accent">Survey</button></a>
-      <a routerLink="formEditor/order"><button mat-raised-button color="accent">Adjust order</button></a>
-      <a routerLink="auth/login" *ngIf="!jwt else logoutTemplate"><button mat-raised-button color="primary">Login page</button></a>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
+<!--<mat-toolbar class="navbar" >-->
+<!--  <mat-toolbar-row>-->
+<!--    <button mat-button>Risikivurdering</button>-->
+<!--    <div class="example-button-row">-->
+<!--      <a routerLink=""><button mat-raised-button color="accent">Home</button></a>-->
+<!--      <a routerLink="formEditor"><button mat-raised-button color="accent">Form Editor</button></a>-->
+<!--      <a routerLink="survey"><button mat-raised-button color="accent">Survey</button></a>-->
+<!--      <a routerLink="formEditor/order"><button mat-raised-button color="accent">Adjust order</button></a>-->
+<!--      <a routerLink="auth/login" *ngIf="!jwt else logoutTemplate"><button mat-raised-button color="primary">Login page</button></a>-->
+<!--    </div>-->
+<!--  </mat-toolbar-row>-->
+<!--</mat-toolbar>-->
 
-<ng-template #logoutTemplate>
-  <a [routerLink]="[]" (click)="logout()"> <button mat-raised-button color="warn">Logout</button></a>
-  <a routerLink="auth/create"><button mat-raised-button color="primary">Create customer</button></a>
-</ng-template>
+<!--<ng-template #logoutTemplate>-->
+<!--  <a [routerLink]="[]" (click)="logout()"> <button mat-raised-button color="warn">Logout</button></a>-->
+<!--  <a routerLink="auth/create"><button mat-raised-button color="primary">Create customer</button></a>-->
+<!--</ng-template>-->
 
 <router-outlet></router-outlet>

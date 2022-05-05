@@ -11,11 +11,13 @@ import {AuthInterceptor} from "./auth/interceptors/auth.interceptor";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainViewComponent,
+    AboutUsComponent,
   ],
     imports: [
         BrowserModule,
